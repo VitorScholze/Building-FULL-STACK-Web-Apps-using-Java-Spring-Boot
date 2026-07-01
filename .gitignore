@@ -1,0 +1,24 @@
+# MacOS
+.DS_Store
+
+# Java / Spring Boot
+target/
+*.log
+
+# IntelliJ / Eclipse / VS Code
+.idea/
+*.iml
+.vscode/
+
+# Maven
+.mvn/
+mvnw
+mvnw.cmd
+
+# Node / React (caso tenha frontend depois)
+node_modules/
+dist/
+build/
+
+# Environment variables
+.env
