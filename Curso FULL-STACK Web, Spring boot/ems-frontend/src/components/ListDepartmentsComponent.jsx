@@ -66,9 +66,6 @@ export const ListDepartmentsComponent = () => {
                 }
             </tbody>
 
-
-
-
         </table>
 
     </div>
