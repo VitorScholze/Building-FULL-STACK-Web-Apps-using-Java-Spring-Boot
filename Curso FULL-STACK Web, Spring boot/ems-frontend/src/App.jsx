@@ -10,7 +10,7 @@ import { BrowserRouter, Routes, Route} from 'react-router-dom'
 function App() {
 
   return (
-    <>
+    
     <BrowserRouter>
       <HeaderComponent/>
       <Routes>
@@ -26,10 +26,11 @@ function App() {
         <Route path = "/departments" element = {<ListDepartmentsComponent/>}></Route>
         {/* // http://localhost:3000/add-department */ }
         <Route path = "/add-department" element = {<DepartmentComponent/>}></Route>
+        
+        <Route path = "/edit-department/:id" element = {<DepartmentComponent/>}></Route>
       </Routes>
       <FooterComponent/>
     </BrowserRouter>
-    </>
   )
 }
 

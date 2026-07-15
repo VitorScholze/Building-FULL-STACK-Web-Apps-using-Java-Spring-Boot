@@ -2,10 +2,10 @@ package net.javaguides.ems.controller;
 
 import java.util.List;
 
-import javax.net.ssl.HttpsURLConnection;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,11 +19,12 @@ import net.javaguides.ems.dto.DepartmentDto;
 import net.javaguides.ems.service.DepartmentService;
 
 @RestController
-@RequestMapping("/api/departaments")
-public class DepartamentController {
+@CrossOrigin("*")
+@RequestMapping("/api/departments")
+public class DepartmentController {
     
     private DepartmentService departmentService;
-     public DepartamentController(DepartmentService departmentService){
+     public DepartmentController(DepartmentService departmentService){
         this.departmentService = departmentService;
     }
 
