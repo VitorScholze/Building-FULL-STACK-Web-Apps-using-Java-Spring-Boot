@@ -5,13 +5,17 @@ import heroImg from './assets/hero.png'
 import './App.css'
 import HelloWorld from './HelloWorld'
 import ListTodoComponent from './components/ListTodoComponent'
+import HeaderComponent from './components/HeaderComponent'
+import FooterComponent from './components/FooterComponent'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
+      <HeaderComponent/>
       <ListTodoComponent/>
+      <FooterComponent/>
     </>
   )
 }
