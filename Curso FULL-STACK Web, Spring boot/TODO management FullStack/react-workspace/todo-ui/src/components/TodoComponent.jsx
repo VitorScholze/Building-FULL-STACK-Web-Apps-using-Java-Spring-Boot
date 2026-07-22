@@ -1,12 +1,12 @@
-import React from 'react'
-import { useState } from 'react'
-import { saveTodo } from '../services/TodoService'
+import { useState, useEffect } from 'react'
+import { getTodo, saveTodo, updateTodo } from '../services/TodoService'
 import { useNavigate, useParams } from 'react-router-dom'
 
 const TodoComponent = () => {
 
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
+    const [error, setError] = useState("")
     const [completed, setCompleted] = useState(false)
     const navigate = useNavigate();
     const {id} = useParams()
@@ -17,12 +17,32 @@ const TodoComponent = () => {
         const todo = {title, description, completed}
         console.log(todo);
 
-        saveTodo(todo).then((response) => {
-            console.log(response.data)
-            navigate('/todos')
-        }).catch(error => {
-            console.error(error)
-        })
+        if(title.trim() === ""){
+            setError("The text field is empty")
+            return
+        }else if(description.trim() === ""){
+            setError("The description field is empty")
+            return
+        }
+        
+        setError("")
+
+        if(id){
+            updateTodo(id, todo).then((response => {
+                navigate('/todos')
+            })).catch(error => {
+                console.error(error)
+            })
+        }else{
+
+            saveTodo(todo).then((response) => {
+                console.log(response.data)
+                navigate('/todos')
+            }).catch(error => {
+                console.error(error)
+            })
+        }
+        
     }
 
     function pageTitle(){
@@ -33,6 +53,19 @@ const TodoComponent = () => {
         }
     }
 
+
+   useEffect(() => {
+    if(id){
+        getTodo(id).then((response) => {
+            console.log(response.data)
+            setTitle(response.data.title)
+            setDescription(response.data.description)
+            setCompleted(response.data.completed)
+        }).catch(error => {
+            console.error(error);
+        })
+        }
+    }, [id])
 
   return (
     <div className = "container">
@@ -46,6 +79,9 @@ const TodoComponent = () => {
                     <form>
                         <div className = "form-group mb-2">
                             <label className = "form-label">Todo Title:</label>
+                            {
+                                error && <div className="alert alert-danger">{error}</div>
+                            }
                             <input
                             type = "text"
                             className = "form-control"
@@ -58,6 +94,9 @@ const TodoComponent = () => {
                         </div>
                          <div className = "form-group mb-2">
                             <label className = "form-label">Todo Description:</label>
+                            {
+                                error && <div className="alert alert-danger">{error}</div>
+                            }
                             <input
                             type = "text"
                             className = "form-control"
@@ -79,7 +118,7 @@ const TodoComponent = () => {
                             <option value = "true">Yes</option>
                             </select>
                         </div>
-                        <button className = "btn btn-success" onClick = { (e) => saveOrUpdateTodo(e)}>Submit</button>
+                        <button className = "btn btn-success" onClick = {(e) => saveOrUpdateTodo(e)}>Submit</button>
                     </form>
                 </div>
             </div>
