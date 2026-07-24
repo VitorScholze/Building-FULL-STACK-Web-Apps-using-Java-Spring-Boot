@@ -1,7 +1,9 @@
 package net.javaguides.todo.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,11 +12,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import lombok.AllArgsConstructor;
+
 import org.springframework.security.core.userdetails.User;
 
 @Configuration
 @EnableMethodSecurity
+@AllArgsConstructor
 public class SpringSecurityConfig {
+
+    private UserDetailsService userDetailsService;
+
 
     @Bean
     public static PasswordEncoder passworldEncoder(){
@@ -39,19 +48,28 @@ public class SpringSecurityConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(){
-        UserDetails vitor = User.builder()
-                .username("vitor")
-                .password(passworldEncoder().encode("password"))
-                .roles("USER")
-                .build();
-
-        UserDetails admin = User.builder()
-                    .username("admin")
-                    .password(passworldEncoder().encode("admin"))
-                    .roles("ADMIN")
-                    .build();
-
-        return new InMemoryUserDetailsManager(vitor, admin);
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception{
+        return configuration.getAuthenticationManager();
     }
+
+
+
+
+//     @Bean
+//     public UserDetailsService userDetailsService(){
+//         UserDetails vitor = User.builder()
+//                 .username("vitor")
+//                 .password(passworldEncoder().encode("password"))
+//                 .roles("USER")
+//                 .build();
+
+//         UserDetails admin = User.builder()
+//                     .username("admin")
+//                     .password(passworldEncoder().encode("admin"))
+//                     .roles("ADMIN")
+//                     .build();
+
+//         return new InMemoryUserDetailsManager(vitor, admin);
+//     }
+// }
 }
