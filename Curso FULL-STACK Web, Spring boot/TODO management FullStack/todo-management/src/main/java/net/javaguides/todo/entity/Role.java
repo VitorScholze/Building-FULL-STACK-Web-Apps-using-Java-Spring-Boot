@@ -1,5 +1,5 @@
 package net.javaguides.todo.entity;
-import jakarta.persistence.Column;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,23 +9,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-@Getter
+
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "todos")
-public class Todo {
+@Table(name = "roles")
+public class Role {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
-    private String title;
-
-    @Column(nullable = false)
-    private String description;
-
-    private boolean completed;
+    private String name;
 }
