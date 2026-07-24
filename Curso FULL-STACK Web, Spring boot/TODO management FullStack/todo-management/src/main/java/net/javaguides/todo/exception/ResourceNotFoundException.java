@@ -1,4 +1,4 @@
-package net.javaguides.exception;
+package net.javaguides.todo.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

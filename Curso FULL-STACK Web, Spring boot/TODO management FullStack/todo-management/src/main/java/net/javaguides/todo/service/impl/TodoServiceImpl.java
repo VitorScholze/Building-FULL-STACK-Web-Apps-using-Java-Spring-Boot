@@ -4,13 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.client.ResourceAccessException;
-
 import lombok.AllArgsConstructor;
-import net.javaguides.exception.ResourceNotFoundException;
 import net.javaguides.todo.dto.TodoDto;
 import net.javaguides.todo.entity.Todo;
+import net.javaguides.todo.exception.ResourceNotFoundException;
 import net.javaguides.todo.mapper.TodoMapper;
 import net.javaguides.todo.repository.TodoRepository;
 import net.javaguides.todo.service.TodoService;
