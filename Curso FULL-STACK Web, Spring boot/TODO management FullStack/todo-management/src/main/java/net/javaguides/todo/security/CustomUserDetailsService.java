@@ -1,7 +1,6 @@
 package net.javaguides.todo.security;
 
 import java.util.Set;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -25,7 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException{
 
         User user = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail)
-                        .orElseThrow(()-> new UsernameNotFoundException("User not exixsts by Username or Email"));
+                        .orElseThrow(()-> new UsernameNotFoundException("User not exists by Username or Email"));
 
         Set<GrantedAuthority> authorities = user.getRoles().stream()
                 .map((role) -> new SimpleGrantedAuthority(role.getName()))
