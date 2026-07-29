@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { loginAPICall } from '../services/AuthService'
+import { loginAPICall , storeToken} from '../services/AuthService'
 import {useNavigate} from "react-router-dom"
 
 function LoginComponent() {
@@ -15,6 +15,10 @@ function LoginComponent() {
 
         loginAPICall(username, password).then((response) => {
             console.log(response.data)
+
+            const token = "Basic " + window.btoa(username + ":" + password);
+            storeToken(token);
+
             navigate("/todos")
         }).catch(error => {
             console.error(error)
