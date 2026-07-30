@@ -31,4 +31,5 @@ export const getLoggedInUser = () => {
 
 export const logout = () => {
     localStorage.clear();
+    sessionStorage.clear();
 }
