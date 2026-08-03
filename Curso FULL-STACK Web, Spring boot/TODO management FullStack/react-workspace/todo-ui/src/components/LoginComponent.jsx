@@ -18,6 +18,9 @@ function LoginComponent() {
 
             // const token = "Basic " + window.btoa(username + ":" + password);
             const token = "Bearer " + response.data.accessToken;
+
+            const role = response.data.role;
+            
             storeToken(token);
 
             saveLoggedInUser(username);
