@@ -9,7 +9,7 @@ const ListTodoComponent = () => {
 
     const navigate = useNavigate();
 
-    const isAdmin = isAdminUser;
+    const isAdmin = isAdminUser();
 
 
     useEffect(() => {
