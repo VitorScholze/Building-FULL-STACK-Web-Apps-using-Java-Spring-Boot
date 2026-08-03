@@ -18,6 +18,7 @@ import net.javaguides.todo.entity.User;
 import net.javaguides.todo.exception.TodoAPIException;
 import net.javaguides.todo.repository.RoleRepository;
 import net.javaguides.todo.repository.UserRepository;
+import net.javaguides.todo.security.JwtTokenProvider;
 import net.javaguides.todo.service.AuthService;
 
 @Service
@@ -28,6 +29,7 @@ public class AuthServiceImpl implements AuthService{
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
     private AuthenticationManager authenticationManager;
+    private JwtTokenProvider jwtTokenProvider;
 
 
     @Override
@@ -72,6 +74,8 @@ public class AuthServiceImpl implements AuthService{
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        return "User Logged-in successfully!";
+        String token = jwtTokenProvider.generatedToken(authentication);
+
+        return token;
     }
 }   
